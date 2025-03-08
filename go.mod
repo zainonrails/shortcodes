@@ -1,3 +1,3 @@
 module github.com/zainonrails/shortcodes
 
-go 1.22
+go 1.24
