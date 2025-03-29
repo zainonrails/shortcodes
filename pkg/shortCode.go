@@ -11,16 +11,17 @@ import (
 // for which you need to create a shortcode
 // example: shortcode.GenerateShortCode(big.NewInt(1220)) => "QqWZcuh"
 
-func GenerateShortCode(id *big.Int) string {
+func GenerateShortCode(id uint) string {
+	idBig := big.NewInt(int64(id))
 	var result strings.Builder
-	id = internal.ShuffleNumber(id)
+	idBig = internal.ShuffleNumber(idBig)
 
 	// converts to base 62
-	for id.Cmp(big.NewInt(0)) == 1 {
-		index := big.NewInt(0).Mod(id, internal.BASE).Int64()
+	for idBig.Cmp(big.NewInt(0)) == 1 {
+		index := big.NewInt(0).Mod(idBig, internal.BASE).Int64()
 		char := internal.CHARACTERS[index]
 		result.WriteString(char)
-		id.Div(id, internal.BASE)
+		idBig.Div(idBig, internal.BASE)
 	}
 
 	// reverse string to make significant bit on the left
