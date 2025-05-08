@@ -15,13 +15,16 @@ package main
 
 import (
     "fmt"
-    "github.com/zainonrails/shortcodes"
+	shortcodes "github.com/zainonrails/shortcodes/pkg"
 )
 
 func main() {
     // Generate a shortcode from a uint ID
-    code := shortcode.GenerateShortCode(1220)
-    fmt.Println(code) // Outputs: QqWZcuh
+	shortcode := shortcodes.GenerateShortCode(1233445)
+	fmt.Println(shortcode)
+
+	original := shortcodes.DecodeShortCode(shortcode)
+	fmt.Println(original)
     
     // Use in your database operations
     // dbRecord.ShortCode = shortcode.GenerateShortCode(dbRecord.ID)
@@ -32,6 +35,7 @@ func main() {
 
 - Generates URL-safe shortcodes
 - Deterministic output (same ID always generates same shortcode)
+- Decodes back to original ID
 - No external dependencies
 - Thread-safe
 
@@ -61,8 +65,13 @@ while maintaining a consistent length for IDs in the same numeric range.
 
 ## API
 
-The package provides a single method:
+The package provides two methods:
 ```go
-GenerateShortCode(id uint) string
+GenerateShortCode(id uint) string  // generates 7 digit code by default
 ```
 Converts an unsigned integer ID into a unique alphanumeric shortcode
+
+```go
+DecodeShortCode(code string) uint
+```
+Decodes string code back to original ID

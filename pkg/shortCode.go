@@ -7,7 +7,7 @@ import (
 	"github.com/zainonrails/shortcodes/internal"
 )
 
-// Takes a big.Int as an argument which would be taken from a database record
+// Takes an uint as an argument which would be taken from a database record
 // for which you need to create a shortcode
 // example: shortcode.GenerateShortCode(big.NewInt(1220)) => "QqWZcuh"
 
